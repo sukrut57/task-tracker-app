@@ -1,6 +1,5 @@
 package com.backend.shell.commands;
 
-import com.backend.shell.model.Task;
 import com.backend.shell.service.TaskService;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
