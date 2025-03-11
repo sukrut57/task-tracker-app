@@ -1,57 +1,158 @@
-## Task tracker
 
-Task tracker is a project used to track and manage your tasks. In this task, you will build a simple command line interface (CLI) to track what you need to do, what you have done, and what you are currently working on. This project will help you practice your programming skills, including working with the filesystem, handling user inputs, and building a simple CLI application.
+# Task Tracker Documentation
 
-#### Requirements
-The application should run from the command line, accept user actions and inputs as arguments, and store the tasks in a JSON file. The user should be able to:
+## Project Overview
 
--  Add, Update, and Delete tasks
--  Mark a task as in progress or done
--  List all tasks
--  List all tasks that are done
--  List all tasks that are not done
--  List all tasks that are in progress
+**Task Tracker** is a simple Spring Boot-based application designed for task management. It allows users to add, update, and track tasks through a **command-line interface (CLI)**. Tasks are stored in a local **JSON file** and can be marked with different statuses such as "todo," "in-progress," or "done."
 
-Here are some constraints to guide the implementation:
+---
 
-- You can use any programming language to build this project.
-- Use positional arguments in command line to accept user inputs.
-- Use a JSON file to store the tasks in the current directory.
-- The JSON file should be created if it does not exist.
-- Use the native file system module of your programming language to interact with the JSON file.
-- Do not use any external libraries or frameworks to build this project.
-- Ensure to handle errors and edge cases gracefully.
+## Features
 
-Example
-The list of commands and their usage is given below:
+- **Add, update, delete tasks**
+- **Mark tasks** as `todo`, `in-progress`, or `done`
+- **List tasks** filtered by status
+- Data is stored in a local **JSON file**
 
-### Adding a new task
-task-cli add "Buy groceries"
-#### Output: Task added successfully (ID: 1)
+---
 
-#### Updating and deleting tasks
-task-cli update 1 "Buy groceries and cook dinner"
-task-cli delete 1
+## Prerequisites
 
-### Marking a task as in progress or done
-task-cli mark-in-progress 1
-task-cli mark-done 1
+Ensure you have the following installed:
 
-### Listing all tasks
-task-cli list
+- **Java 17** or higher
+- **Maven** or **Gradle** for build management
+- **Spring Boot** dependencies
+- **GraalVM** (for native build)
 
-### Listing tasks by status
-task-cli list done
-task-cli list todo
-task-cli list in-progress
+---
 
-## Task Properties
-Each task should have the following properties:
+## Installation
 
-- id: A unique identifier for the task
-- description: A short description of the task
-- status: The status of the task (todo, in-progress, done)
-- createdAt: The date and time when the task was created
-- updatedAt: The date and time when the task was last updated
+### Clone the Repository
+```bash
+git clone https://github.com/sukrut57/task-tracker-app.git
+cd task-tracker-app
+```
 
-Make sure to add these properties to the JSON file when adding a new task and update them when updating a task.
+### Build the Project
+
+#### Using Maven
+```bash
+./mvnw clean install
+```
+
+#### Using Gradle
+```bash
+./gradlew clean build
+```
+
+---
+
+## Usage
+
+Once the application is set up, you can interact with it using various commands.
+
+### Available Commands
+
+1. **Add Task**:
+   Adds a new task with a description.
+   ```bash
+   task-cli add "Task description"
+   ```
+
+2. **Update Task**:
+   Updates the description of an existing task.
+   ```bash
+   task-cli update <task_id> "Updated task description"
+   ```
+
+3. **Mark Task as In Progress**:
+   Marks the specified task as "in-progress".
+   ```bash
+   task-cli mark-in-progress <task_id>
+   ```
+
+4. **Mark Task as Done**:
+   Marks the specified task as "done".
+   ```bash
+   task-cli mark-done <task_id>
+   ```
+
+5. **List Tasks**:
+   Lists tasks filtered by status.
+   ```bash
+   task-cli list               # Lists all tasks
+   task-cli list done          # Lists completed tasks
+   task-cli list todo          # Lists pending tasks
+   task-cli list in-progress   # Lists tasks in progress
+   ```
+
+---
+
+## Task Model
+
+### Properties:
+- **id**: Unique identifier for each task
+- **description**: Task description
+- **status**: Can be one of `todo`, `in-progress`, or `done`
+- **createdAt**: Timestamp of task creation
+- **updatedAt**: Timestamp of task's last update
+
+---
+
+## File Structure
+
+```
+task-tracker-app/
+│
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── com/
+│   │           └── tasktracker/
+│   │               ├── TaskTrackerApplication.java  # Main application entry point
+│   │               ├── commands
+│   │               │   └── TaskComponent.java        # Command to add a new task
+│   │               └── model                 # Task model
+│   │               │   └── Task.java
+|   |               └── service
+|   |                   └── TaskService.java  # Service for task operations
+│   │                   └── FileService.java  # Service for file operations
+│   └── resources/
+│       └── application.properties                 # Configuration properties
+│
+├── build.gradle                               # Gradle build configuration
+├── pom.xml                                    # Maven build configuration
+└── README.md                                  # Project documentation
+```
+
+---
+
+## Development
+
+### Running the Application
+
+1. **Run with Spring Boot**:
+   ```bash
+   ./gradlew bootRun     # Gradle
+   ./mvnw spring-boot:run   # Maven
+   ```
+
+2. **Run the Native Executable** (if using GraalVM):
+   After building the native executable:
+   ```bash
+   build/native/nativeCompile/task-tracker.exe
+   ```
+
+---
+
+## Contributing
+
+Feel free to fork the repository and submit pull requests. For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
