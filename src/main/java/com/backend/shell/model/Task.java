@@ -39,6 +39,9 @@ public class Task {
         return createdAt;
     }
 
+    public Task() {
+    }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
